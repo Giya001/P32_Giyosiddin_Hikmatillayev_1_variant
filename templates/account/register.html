@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+	Register
+{% endblock %}
+
+{% block content %}
+	<div class="card">
+    <div class="card-header">
+        <span class="fs-3 text-success">Register User</span>
+    </div>
+    <div class="card-body">
+        <form method="POST" action="{% url 'register' %}">
+            {% csrf_token %}
+            {{ form | crispy}}
+            <button type="submit" class="btn btn-success">Register</button>
+            <p class="mt-3">Do you have account?<a href="{% url 'login' %}">Login</a> </p>
+        </form>
+
+    </div>
+    </div>
+{% endblock %}
