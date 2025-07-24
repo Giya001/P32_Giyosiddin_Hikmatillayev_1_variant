@@ -1,0 +1,2 @@
+# P32_Giyosiddin_Hikmatillayev_1_variant
+exam project
