@@ -10,10 +10,10 @@ from book.models import Book
 @login_required
 # Create your views here.
 def home(request):
-    books = Book.objects.all()
+    books = Book.objects.filter(is_read=True,user=request.user)
     search_book = request.GET.get('q')
     if search_book:
-        books = books.objects.filter(Q(title__icontains=search_book) | Q(author__icontains=search_book), is_read=True)
+        books = Book.objects.filter(Q(title__icontains=search_book) | Q(author__icontains=search_book), is_read=True)
 
     return render(request, 'book/home.html', {'books': books})
 
@@ -23,7 +23,7 @@ def home_not_read(request):
     books = Book.objects.filter(is_read=False)
     search_book = request.GET.get('q')
     if search_book:
-        books = books.objects.filter(Q(title__icontains=search_book) | Q(author__icontains=search_book), is_read=True)
+        books = Book.objects.filter(Q(title__icontains=search_book) | Q(author__icontains=search_book), is_read=True)
 
     return render(request, 'book/home.html', {'books': books})
 
