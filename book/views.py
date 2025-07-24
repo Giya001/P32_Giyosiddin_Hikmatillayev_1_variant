@@ -35,21 +35,21 @@ def createBook(request):
     return render(request, 'book/create.html', context=context)
 
 
-def updateBook(request, book_id):
-    book = get_object_or_404(Book, id=book_id)
-    if request.method == "POST":
-        form = BookForm(request.POST, instance=book)
+def update(request, book_id):
+    book = get_object_or_404(Book, id=book_id, author=request.user)
+    if request.method == 'POST':
+        form = BookForm(request.POST, request.FILES, instance=book)
         if form.is_valid():
             book = form.save()
-            if book.is_read:
+            if book.published:
                 return redirect('home')
-            return redirect('home')
+            return redirect('home_out')
+    else:
+        form = BookForm(instance=book)
+    return render(request, 'book/update.html', {'form': form, 'book': book})
 
-        else:
-            form = BookForm(instance=book)
 
-    context = {
-        'book': book,
-    }
-
-    return render(request, 'book/update.html', context=context)
+def delete(request, book_id):
+    book = get_object_or_404(Book, id=book_id, author=request.user)
+    book.delete()
+    return redirect('home')

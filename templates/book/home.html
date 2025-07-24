@@ -33,8 +33,8 @@
                             {% endif %}
                         </div>
                         <div class="card-footer d-flex justify-content-end gap-2">
-                            <a href="{% url 'createBook' blog.id %}" class="btn btn-warning btn-sm">Tahrirlash</a>
-                            <a href="#" class="btn btn-danger btn-sm">O'chirish</a>
+                            <a href="{% url 'update' book.id %}" class="btn btn-warning btn-sm">Tahrirlash</a>
+                            <a href="{% url 'delete' book.id %}" class="btn btn-danger btn-sm">O'chirish</a>
                         </div>
                     </div>
                 </div>
